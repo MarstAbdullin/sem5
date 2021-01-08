@@ -1,0 +1,1 @@
+GET http://localhost:8080/troupes/search?histrionics.name=Bal vorov

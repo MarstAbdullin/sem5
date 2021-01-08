@@ -1,0 +1,213 @@
+db.theatre.insert(
+   {
+       title: 'Bolshoy',
+       peopleInGroupe: 10,
+       plannedCitiesNum: 7,
+       genres: ['Comedy', 'neComedy'],
+       inActive: true,
+       keywords: ['Comedy', 'Drama', 'fantasy'],
+       description:'the best balley troupe'
+   }
+   );
+
+db.theatre.insert(
+   {
+       title: 'Mariinsky',
+       peopleInGroupe: 13,
+       plannedCitiesNum: 2,
+       genres: ['Light game', 'Psyho'],
+       inActive: true,
+       keywords: ['Comedy', 'Psyho', 'fantasy'],
+       artists: ['Tolik', 'Vasilich', 'Goshik', 'Doshik']
+   }
+   );
+
+db.theatre.insert(
+   {
+       title: 'Alexandrinsky',
+       plannedCitiesNum: 6,
+       inActive: false,
+       keywords: ['druag', 'fantasy'],
+   }
+   );
+
+db.theatre.insert(
+   {
+       title: 'Drama',
+       state: 'draft',
+       inActive: false,
+       keywords: ['Comedy', 'Drama', 'fantasy']
+   }
+   );
+
+db.theatre.find(
+   {
+       keywords: 'Comedy'
+   }
+   )
+
+db.theatre.find(
+   {
+       $or:
+           [
+               {
+                   plannedCitiesNum:
+                       {
+                           $gt: 3
+                       }
+                       },
+               {
+                   keywords: 'Comedy'
+               }
+               ]
+   }
+   )
+
+db.theatre.find(
+   {
+       _id: ObjectId('5fc2ab768cf965438b2b988')
+   }
+   )
+
+db.theatre.find(
+   {
+       plannedCitiesNum:
+           {
+               $exists: true
+           }
+           },
+   {
+       title:1,
+       _id: 0
+   }
+   )
+
+db.theatre.find(
+   {
+       plannedCitiesNum:
+           {
+               $exists: true
+           }
+           },
+   {
+       genres: 1,
+       keywords: 1,
+       plannedCitiesNum: 1,
+       peopleInGroupe: 1,
+       _id: 0
+   }
+   ).sort(
+       {
+           plannedCitiesNum: 1, peopleInGroupe: -1
+       }
+       )
+
+db.theatre.update(
+   {
+       title: 'Bolshoy'
+   },
+   {
+       $set:
+           {
+               concertNumber: 27
+           }
+   }
+   )
+
+db.theatre.update(
+   {
+       title: 'Bolshoy'
+   },
+   {
+       $inc:
+           {
+               concertNumber: 40
+           }
+   }
+   )
+
+db.theatre.update(
+   {
+       title: 'Bolshoy'
+   },
+   {
+       $push:
+           {
+               keywords: 'Comedy troupe'
+           }
+   }
+   )
+
+db.theatre.update(
+   {
+       title: 'Bolshoy'
+   },
+   {
+       $set:
+           {
+               dresser:
+                   {
+                       firstName: 'Marik',
+                       lastName: 'Sharik',
+                       tel: 12345,
+                   }
+           }
+   }
+   )
+
+db.theatre.update(
+   {
+       title: 'Bolshoy'
+   },
+   {
+       $set:
+           {
+               artists:
+               [
+                   {
+                       firstName: 'Rinat',
+                       lastName: 'Bolshoy',
+                       role: 'artist'
+                   },
+                   {
+                       firstName: 'Vlad',
+                       lastName: 'Malay',
+                       role: 'makeUpMen'
+                   },
+                   ]
+           }
+   }
+   )
+
+db.histrionics.insert(
+   {
+       title: 'Satire theatre',
+       city: 'Moskwa',
+       genres: ['Light game', 'Psyho', 'druag', 'sound game'],
+   }
+   );
+
+db.histrionics.insert(
+   {
+       title: 'Kachalov Theatre',
+       city: 'Kazan',
+       genres: ['Light game', 'Psyho', 'druag', 'sound game'],
+   }
+   );
+
+db.theatre.update(
+   {
+       _id: ObjectId('5fc2ab768cf965438b2b988')
+   },
+   {
+       $set:
+           {
+               histrionics:
+                   {
+                   main: ObjectId('5fc2ab739cf965438b2b990'),
+                   notmain: ObjectId('5fc2ab759cf965438b2b991')
+               }
+           }
+   }
+   )
+
